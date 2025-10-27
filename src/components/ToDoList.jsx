@@ -65,34 +65,27 @@ function ToDoList() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-100">
+        <ScrollArea className="h-100 w-100">
           {todos.length > 0 ? (
-            <div className="flex flex-col gap-6">
-              <ul>
-                {todos.map((todo) => (
-                  <div className="grid gap-2">
-                    <li key={todo.id}>
-                      <Card className="min-h-min m-2 p-2 bg-teal-100  flex-row items-center justify-between">
-                        <CardDescription className="text-base">
-                          {todo.text}
-                        </CardDescription>
+            <ul className="flex flex-col">
+              {todos.map((todo) => (
+                <li key={todo.id}>
+                  <Card className="min-h-min m-2 p-2 bg-teal-100  flex-row items-center justify-between">
+                    <CardDescription className="text-base">
+                      {todo.text}
+                    </CardDescription>
 
-                        <div className="flex gap-2">
-                          <EditTask task={todo} onEditTask={editTask} />
+                    <div className="flex gap-2">
+                      <EditTask task={todo} onEditTask={editTask} />
 
-                          <Button
-                            size="icon"
-                            onClick={() => deleteTask(todo.id)}
-                          >
-                            <Check className="h-10 w-10" />
-                          </Button>
-                        </div>
-                      </Card>
-                    </li>
-                  </div>
-                ))}
-              </ul>
-            </div>
+                      <Button size="icon" onClick={() => deleteTask(todo.id)}>
+                        <Check className="h-10 w-10" />
+                      </Button>
+                    </div>
+                  </Card>
+                </li>
+              ))}
+            </ul>
           ) : (
             <CardTitle>Yay! No more tasks!!</CardTitle>
           )}

@@ -1,6 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Bitcount+Grid+Single:wght@100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Archivo:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
 
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -68,8 +66,6 @@
   --spacing-reverseBoxShadowY: -4px;
   --radius-base: 5px;
   --shadow-shadow: var(--shadow);
-  --font-gabarito: Gabarito, "sans-serif";
-  --font-archivo: Archivo, "sans-serif";
   --font-bitcount: Bitcount Grid Single, "sans-serif";
   --font-weight-base: 500;
   --font-weight-heading: 700;
