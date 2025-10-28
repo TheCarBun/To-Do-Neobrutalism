@@ -1,54 +1,101 @@
 import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "motion/react";
 import { Card } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+
+const DigitCard = ({ digit }) => (
+  <motion.div
+    key={digit}
+    initial={{ rotateX: 90 }}
+    animate={{ rotateX: 0 }}
+    exit={{ rotateX: -90 }}
+    transition={{ duration: 0.25, ease: "easeIn" }}
+  >
+    <Card className="w-10 h-10 flex items-center justify-center m-1 bg-teal-100 text-2xl shadow-md">
+      {digit}
+    </Card>
+  </motion.div>
+);
+
+const TimeSegment = ({ value }) => (
+  <div className="flex">
+    {value.split("").map((digit, index) => (
+      <AnimatePresence mode="wait" key={index}>
+        <DigitCard digit={digit} />
+      </AnimatePresence>
+    ))}
+  </div>
+);
 
 const DigitalClock = () => {
-  // 1. State to hold the current time
   const [time, setTime] = useState(new Date());
+  const [is24Hour, setIs24Hour] = useState(false);
+  const [showSeconds, setShowSeconds] = useState(false);
 
-  // 2. Effect to update the time every second
+  // Update the clock accurately every second
   useEffect(() => {
-    const timerId = setInterval(() => {
-      setTime(new Date()); // Update the time state
-    }, 1000);
+    const tick = () => {
+      setTime(new Date());
+      setTimeout(tick, 1000 - (Date.now() % 1000)); // aligns with system clock
+    };
+    tick();
+    return () => clearTimeout(tick);
+  }, []);
 
-    // Cleanup function: important to clear the interval when the component unmounts
-    return () => clearInterval(timerId);
-  }, []); // Empty dependency array ensures this effect runs only once on mount
-
-  // 3. Formatting the time
-  // Use toLocaleTimeString and options to ensure two digits for everything
-  const hours = String(time.getHours()).padStart(2, "0");
+  let hours = time.getHours();
   const minutes = String(time.getMinutes()).padStart(2, "0");
   const seconds = String(time.getSeconds()).padStart(2, "0");
 
-  // 4. Function to render a single time segment (e.g., "10")
-  const renderSegment = (segment) => (
-    <div className="flex h-15">
-      {/* Map over the characters of the two-digit string (e.g., '1' and '0') */}
-      {segment.split("").map((digit, index) => (
-        <Card
-          key={index}
-          className="w-10 h15 flex items-center justify-center m-1 bg-teal-200 text-2xl"
-        >
-          {digit}
-        </Card>
-      ))}
-    </div>
-  );
+  if (!is24Hour) {
+    hours = hours % 12 || 12; // convert 0 -> 12 for 12-hour format
+  }
 
+  const formattedHours = String(hours).padStart(2, "0");
   return (
-    <Card className="w-max p-2 flex-row items-center fixed right-5 top-5 gap-0 bg-teal-50">
-      {renderSegment(hours)}
-      <span className="w-2 h15 items-center justify-center m-1 text-2xl">
-        :
-      </span>
-      {renderSegment(minutes)}
-      {/* <span className="w-2 h15 flex items-center justify-center m-1 text-2xl">
-        :
-      </span>
-      {renderSegment(seconds)} */}
+    <Card className="fixed top-5 right-5 flex flex-row gap-2 p-2 items-end space-y-2 bg-teal-50">
+      {/* Clock Display */}
+      <Card className="flex-row items-center gap-0 p-2 rounded-lg shadow-lg border flex">
+        <TimeSegment value={formattedHours} />
+        <span className="text-2xl font-mono mx-1">:</span>
+        <TimeSegment value={minutes} />
+        {showSeconds && (
+          <>
+            <span className="text-2xl font-mono mx-1">:</span>
+            <TimeSegment value={seconds} />
+          </>
+        )}
+      </Card>
+
+      {/* Control Buttons */}
+      <div className="grid gap-2">
+        <Button
+          onClick={() => setIs24Hour((prev) => !prev)}
+          size="icon"
+          className="bg-white hover:bg-teal-100"
+        >
+          {is24Hour ? "12h" : "24h"}
+        </Button>
+
+        <Button
+          onClick={() => setShowSeconds((prev) => !prev)}
+          size="icon"
+          className="bg-white hover:bg-teal-100"
+        >
+          {showSeconds ? "Sec" : "Sec"}
+        </Button>
+      </div>
     </Card>
   );
+  // return (
+  //   <Card className="fixed top-5 right-5 flex-row items-center gap-0 p-2 bg-teal-50 rounded-lg shadow-lg border">
+  //     <TimeSegment value={hours} />
+  //     <span className="text-2xl font-mono mx-1">:</span>
+  //     <TimeSegment value={minutes} />
+  //     {/* Uncomment to show seconds */}
+  //     <span className="text-2xl font-mono mx-1">:</span>
+  //     <TimeSegment value={seconds} />
+  //   </Card>
+  // );
 };
 
 export default DigitalClock;
