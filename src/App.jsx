@@ -1,5 +1,4 @@
 import DigitalClock from "./components/DigiClock";
-import DialClock from "./components/DialClock";
 import ToDoList from "./components/ToDoList";
 import MoreIncoming from "./components/MoreIncoming";
 import "./App.css";
