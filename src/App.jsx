@@ -23,9 +23,6 @@ function App() {
         </div>
         
         {/* Draggable Widgets */}
-        <motion.div drag dragMomentum={false} className="cursor-grab active:cursor-grabbing z-10 absolute top-20 left-10">
-          <DialClock size={300} className="shadow-shadow rounded-full border-2 border-black bg-white" />
-        </motion.div>
 
         <motion.div drag dragMomentum={false} className="z-20 absolute top-5 right-5">
           <DigitalClock /> 
