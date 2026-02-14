@@ -64,7 +64,7 @@
   --spacing-boxShadowY: 4px;
   --spacing-reverseBoxShadowX: -4px;
   --spacing-reverseBoxShadowY: -4px;
-  --radius-base: 5px;
+  --radius-base: 12px;
   --shadow-shadow: var(--shadow);
   --font-bitcount: Bitcount Grid Single, "sans-serif";
   --font-weight-base: 500;
