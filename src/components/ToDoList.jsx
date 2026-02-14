@@ -57,7 +57,7 @@ function ToDoList() {
   };
 
   return (
-    <Card className="w-full max-w-md text-center m-10 bg-teal-50">
+    <Card className="w-full max-w-md text-center bg-white">
       <CardHeader>
         <CardTitle className="text-2xl">To-Do</CardTitle>
         <CardDescription>
@@ -65,21 +65,25 @@ function ToDoList() {
         </CardDescription>
       </CardHeader>
       <CardContent>
-        <ScrollArea className="h-100 w-100">
+        <ScrollArea className="h-96 w-full pr-4">
           {todos.length > 0 ? (
-            <ul className="flex flex-col">
+            <ul className="flex flex-col gap-2">
               {todos.map((todo) => (
-                <li key={todo.id}>
-                  <Card className="min-h-min m-2 p-2 bg-teal-100  flex-row items-center justify-between">
-                    <CardDescription className="text-base">
+                <li key={todo.id} className="p-1">
+                  <Card className="flex flex-row items-center justify-between p-3 bg-teal-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
+                    <span className="text-base font-medium text-left break-all mr-2 p-1">
                       {todo.text}
-                    </CardDescription>
+                    </span>
 
-                    <div className="flex gap-2">
+                    <div className="flex gap-2 shrink-0">
                       <EditTask task={todo} onEditTask={editTask} />
 
-                      <Button size="icon" onClick={() => deleteTask(todo.id)}>
-                        <Check className="h-10 w-10" />
+                      <Button 
+                        size="icon" 
+                        onClick={() => deleteTask(todo.id)}
+                        className="bg-white hover:bg-red-100 border-2 border-black text-black"
+                      >
+                        <Check className="h-5 w-5" />
                       </Button>
                     </div>
                   </Card>
@@ -87,11 +91,13 @@ function ToDoList() {
               ))}
             </ul>
           ) : (
-            <CardTitle>Yay! No more tasks!!</CardTitle>
+             <div className="h-full flex items-center justify-center p-10 opacity-50">
+                <CardTitle>Yay! No more tasks!!</CardTitle>
+            </div>
           )}
         </ScrollArea>
       </CardContent>
-      <div className="min-w-20">
+      <div className="p-4 pt-0">
         <ToDoForm onAddTask={addNewTask} />
       </div>
     </Card>
