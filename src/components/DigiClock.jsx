@@ -11,7 +11,7 @@ const DigitCard = ({ digit }) => (
     exit={{ rotateX: -90 }}
     transition={{ duration: 0.25, ease: "easeIn" }}
   >
-    <Card className="w-10 h-10 flex items-center justify-center m-1 bg-teal-100 text-2xl shadow-md">
+    <Card className="w-10 h-10 flex items-center justify-center m-1 bg-white border-2 border-black text-4xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
       {digit}
     </Card>
   </motion.div>
@@ -30,7 +30,7 @@ const TimeSegment = ({ value }) => (
 const DigitalClock = () => {
   const [time, setTime] = useState(new Date());
   const [is24Hour, setIs24Hour] = useState(false);
-  const [showSeconds, setShowSeconds] = useState(false);
+  const [showSeconds, setShowSeconds] = useState(true);
 
   // Update the clock accurately every second
   useEffect(() => {
@@ -52,50 +52,40 @@ const DigitalClock = () => {
 
   const formattedHours = String(hours).padStart(2, "0");
   return (
-    <Card className="fixed top-5 right-5 flex flex-row gap-2 p-2 items-end space-y-2 bg-teal-50">
+    <Card className="cursor-grab active:cursor-grabbing w-fit flex flex-col gap-2 p-4 items-center bg-white border-2 border-black shadow-shadow z-10">
       {/* Clock Display */}
-      <Card className="flex-row items-center gap-0 p-2 rounded-lg shadow-lg border flex">
+      <div className="flex flex-row items-center gap-1 p-2 bg-teal-400 border-2 border-black shadow-sm rounded-base">
         <TimeSegment value={formattedHours} />
-        <span className="text-2xl font-mono mx-1">:</span>
+        <span className="text-2xl font-black mx-1 animate-pulse">:</span>
         <TimeSegment value={minutes} />
         {showSeconds && (
           <>
-            <span className="text-2xl font-mono mx-1">:</span>
+            <span className="text-2xl font-black mx-1 animate-pulse">:</span>
             <TimeSegment value={seconds} />
           </>
         )}
-      </Card>
+      </div>
 
       {/* Control Buttons */}
-      <div className="grid gap-2">
+      <div className="flex gap-2 w-full justify-center">
         <Button
           onClick={() => setIs24Hour((prev) => !prev)}
-          size="icon"
-          className="bg-white hover:bg-teal-100"
+          size="sm"
+          className="h-8 text-xs bg-white hover:bg-black hover:text-white text-black border-2 border-black font-bold uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
         >
           {is24Hour ? "12h" : "24h"}
         </Button>
 
         <Button
           onClick={() => setShowSeconds((prev) => !prev)}
-          size="icon"
-          className="bg-white hover:bg-teal-100"
+          size="sm"
+          className="h-8 text-xs bg-white hover:bg-black hover:text-white text-black border-2 border-black font-bold uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
         >
-          {showSeconds ? "Sec" : "Sec"}
+          {showSeconds ? "Hide Sec" : "Show Sec"}
         </Button>
       </div>
     </Card>
   );
-  // return (
-  //   <Card className="fixed top-5 right-5 flex-row items-center gap-0 p-2 bg-teal-50 rounded-lg shadow-lg border">
-  //     <TimeSegment value={hours} />
-  //     <span className="text-2xl font-mono mx-1">:</span>
-  //     <TimeSegment value={minutes} />
-  //     {/* Uncomment to show seconds */}
-  //     <span className="text-2xl font-mono mx-1">:</span>
-  //     <TimeSegment value={seconds} />
-  //   </Card>
-  // );
 };
 
 export default DigitalClock;
