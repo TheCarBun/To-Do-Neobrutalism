@@ -32,7 +32,7 @@ function ToDoList() {
         // Migration: Ensure all tasks have createdAt and progress
         return parsed.map((task) => ({
           ...task,
-          createdAt: task.createdAt || Date.now(),
+          createdAt: task.createdAt || task.id,
           progress: task.progress || "",
         }));
       }
