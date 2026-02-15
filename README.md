@@ -1,5 +1,9 @@
 # React Todo App with Neobrutalism UI
 
+> [! Note]
+> 
+> This is just me learning React and trying to make a good-looking UI with neobrutalism.
+
 A modern, brutalist-style Todo application built with React, featuring bold colors, sharp contrasts, and raw design elements.
 
 ## Features
