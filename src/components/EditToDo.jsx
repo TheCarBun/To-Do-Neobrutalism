@@ -44,7 +44,7 @@ function EditTask({ task, onEditTask }) {
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
-        <Button size="icon">
+        <Button size="icon" className="bg-teal-200 hover:bg-yellow-200">
           <Pencil className="h-10 m-10" />
         </Button>
       </DialogTrigger>
