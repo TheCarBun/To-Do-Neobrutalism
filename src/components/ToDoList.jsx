@@ -30,11 +30,16 @@ function ToDoList() {
       if (storedTasks) {
         const parsed = JSON.parse(storedTasks);
         // Migration: Ensure all tasks have createdAt and progress
-        return parsed.map((task) => ({
-          ...task,
-          createdAt: task.createdAt || Date.now(),
-          progress: task.progress || "",
-        }));
+        return parsed.map((task) => {
+          const isTimestampId = typeof task.id === 'number' && task.id > 1000000000000;
+          return {
+            ...task,
+            // If ID is a timestamp, use it as creation date (fixes previous migration issues)
+            // Otherwise keep existing createdAt or default to now
+            createdAt: isTimestampId ? task.id : (task.createdAt || Date.now()),
+            progress: task.progress || "",
+          };
+        });
       }
       return [
         { id: 0, text: "Test Task 1", completed: false, createdAt: Date.now(), progress: "" },
@@ -94,7 +99,7 @@ function ToDoList() {
   const getDaysActive = (timestamp) => {
     const now = Date.now();
     const diffTime = Math.abs(now - timestamp);
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24)); 
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24)); 
     return diffDays;
   };
 
