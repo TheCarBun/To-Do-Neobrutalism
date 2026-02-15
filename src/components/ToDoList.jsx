@@ -58,16 +58,16 @@ function ToDoList() {
 
   return (
     <Card className="w-full max-w-md text-center bg-white">
-      <CardHeader>
-        <CardTitle className="text-2xl">To-Do</CardTitle>
-        <CardDescription>
-          We got <b className="text-lg">{todos.length}</b> tasks to do
+      {/* <CardHeader> */}
+        {/* <CardTitle className="text-2xl">To-Do</CardTitle> */}
+        <CardDescription className="text-lg">
+          We got <b className="text-xl">{todos.length}</b> tasks to do
         </CardDescription>
-      </CardHeader>
-      <CardContent>
-        <ScrollArea className="h-96 w-full pr-4">
+      {/* </CardHeader> */}
+      <CardContent className="px-4">
+        <ScrollArea className="h-96 w-full">
           {todos.length > 0 ? (
-            <ul className="flex flex-col gap-2">
+            <ul className="flex flex-col">
               {todos.map((todo) => (
                 <li key={todo.id} className="p-1">
                   <Card className="flex flex-row items-center justify-between p-3 bg-teal-200 hover:translate-x-[2px] hover:translate-y-[2px] hover:shadow-none transition-all">
