@@ -14,7 +14,7 @@
   --foreground: oklch(0% 0 0);
   --main-foreground: oklch(0% 0 0);
   /* --main: oklch(78.57% 0.1422 180.36); */
-  --main: oklch(78.996% 0.09213 185.835);
+  --main: #00d5be;
   --border: oklch(0% 0 0);
   --ring: oklch(0% 0 0);
   --overlay: oklch(0% 0 0 / 0.8);
