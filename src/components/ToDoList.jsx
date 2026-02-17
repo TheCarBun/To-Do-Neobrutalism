@@ -102,7 +102,7 @@ function ToDoList() {
   const doneTasks = todos.filter((t) => t.completed);
 
   return (
-    <Card className="w-full max-w-md text-center bg-white py-2">
+    <Card className="w-full max-w-md text-center bg-secondary-background py-2">
       {/* <CardDescription className="text-lg pt-4">
         Thinking about what to do?
       </CardDescription> */}
@@ -123,14 +123,14 @@ function ToDoList() {
               {activeTasks.length > 0 ? (
                 <Accordion type="single" collapsible className="w-full space-y-2 p-1">
                   {activeTasks.map((todo) => (
-                    <AccordionItem key={todo.id} value={`item-${todo.id}`} className="border-2 border-black rounded-base px-2 bg-teal-400">
+                    <AccordionItem key={todo.id} value={`item-${todo.id}`} className="border-2 border-border rounded-base px-2 bg-main">
                       <AccordionTrigger className="font-medium p-1 py-3 break-all mr-2">
                           {todo.text}
                       </AccordionTrigger>
                       
-                      <AccordionContent className="text-left px-1 pb-3 bg-teal-400">
+                      <AccordionContent className="text-left px-1 pb-3 bg-main">
                         <div className="flex items-center justify-between">
-                            <div className="text-xs font-bold w-fit bg-white p-2 rounded-base">
+                            <div className="text-xs font-bold w-fit bg-secondary-background p-2 rounded-base">
                                 Days Active: {getDaysActive(todo.createdAt)}
                             </div>
                             <div className="flex gap-2">
@@ -141,7 +141,7 @@ function ToDoList() {
                                       e.stopPropagation();
                                       toggleTaskCompletion(todo.id);
                                     }}
-                                    className="shrink-0 bg-white hover:bg-teal-200 border-2 border-black text-black rounded-base"
+                                    className="shrink-0 bg-secondary-background hover:bg-main border-2 border-border text-foreground rounded-base"
                                   >
                                     <Check className="h-4 w-4" />
                                 </Button>
@@ -152,7 +152,7 @@ function ToDoList() {
                                 placeholder="Add Progress Notes here..." 
                                 value={todo.progress}
                                 onChange={(e) => updateProgress(todo.id, e.target.value)}
-                                className="bg-white/50 min-h-[60px]"
+                                className="bg-secondary-background/50 min-h-[60px]"
                             />
                         </div>
                       </AccordionContent>
@@ -170,11 +170,11 @@ function ToDoList() {
                {doneTasks.length > 0 ? (
                 <Accordion type="single" collapsible className="w-full space-y-2 p-1">
                   {doneTasks.map((todo) => (
-                    <AccordionItem key={todo.id} value={`item-${todo.id}`} className="border-2 border-black rounded-base px-2 bg-gray-200 decoration-dotted">
-                        <AccordionTrigger className="hover:no-underline text-base font-medium text-left break-all mr-2 p-1 py-3 line-through bg-gray-200">
+                    <AccordionItem key={todo.id} value={`item-${todo.id}`} className="border-2 border-border rounded-base px-2 bg-secondary-background decoration-dotted">
+                        <AccordionTrigger className="hover:no-underline text-base text-foreground font-medium text-left break-all mr-2 p-1 py-3 line-through bg-secondary-background">
                             {todo.text}
                         </AccordionTrigger>
-                       <AccordionContent className="text-left px-1 pb-3 bg-gray-200">
+                       <AccordionContent className="text-left px-1 pb-3 bg-secondary-background">
                             <div className="flex items-center justify-between mb-2 opacity-70">
                                 <div className="text-xs font-bold opacity-70">
                                     Days Active: {getDaysActive(todo.createdAt)}
@@ -186,7 +186,7 @@ function ToDoList() {
                                             e.stopPropagation();
                                             toggleTaskCompletion(todo.id);
                                         }}
-                                        className="h-8 w-8 bg-white hover:bg-teal-200 border-2 border-black text-black rounded-base"
+                                        className="h-8 w-8 bg-secondary-background hover:bg-main/80 border-2 border-border text-foreground rounded-base"
                                         title="Restore"
                                     >
                                         <RotateCcw className="h-4 w-4" />
@@ -197,7 +197,7 @@ function ToDoList() {
                                             e.stopPropagation();
                                             deleteTask(todo.id);
                                         }}
-                                        className="h-8 w-8 bg-white hover:bg-red-200 border-2 border-black text-black rounded-base"
+                                        className="h-8 w-8 bg-secondary-background hover:bg-red-500 border-2 border-border text-foreground rounded-base"
                                         title="Delete Permanently"
                                     >
                                         <Trash2 className="h-4 w-4" />
@@ -209,7 +209,7 @@ function ToDoList() {
                                 <Textarea 
                                     value={todo.progress} 
                                     readOnly 
-                                    className="bg-white/50 min-h-[60px]" 
+                                    className="bg-secondary-background/50 min-h-[60px]" 
                                 />
                             </div>
                       </AccordionContent>

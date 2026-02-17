@@ -36,11 +36,11 @@ export function RadialClockFace({
   const totalHours = mode === "12h" ? 12 : 24;
   const step = labelStep ?? 3;
 
-  // Neo-Brutalist Constants
-  const borderColor = "#000"; // Hard black
-  const shadowColor = "#000"; // Hard black shadow
-  const bgColor = "#fff"; // White face
-  const tickColor = "#000"; // Black ticks
+  // Neo-Brutalist Constants - Using CSS variables for dark mode support
+  const borderColor = "var(--border)";
+  const shadowColor = "var(--border)";
+  const bgColor = "var(--secondary-background)";
+  const tickColor = "var(--foreground)";
 
   const uniqueSuffix = React.useId().replace(/[:]/g, "-");
   const ringId = `neo-${mode}-${period ?? "all"}-${uniqueSuffix}`;
@@ -71,12 +71,12 @@ export function RadialClockFace({
         </defs>
 
         {/* Hard Shadow (Offset Circle) */}
-        <circle
+        {/* <circle
           cx={center + offset}
           cy={center + offset}
           r={outerRadius}
           fill={shadowColor}
-        />
+        /> */}
 
         {/* Main Face Background */}
         <circle
@@ -217,7 +217,7 @@ export default function DialClock({ size = 300, className, ...props }) {
   const endAngle = (totalMinutes / dayMinutes) * 360;
 
   const bezelSegments = [
-    { start: 0, end: endAngle, color: "#2dd4bf" } // Teal-400
+    { start: 0, end: endAngle, color: "var(--main)" }
   ];
 
   return (

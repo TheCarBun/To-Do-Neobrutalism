@@ -11,7 +11,7 @@ const DigitCard = ({ digit }) => (
     exit={{ rotateX: -90 }}
     transition={{ duration: 0.25, ease: "easeIn" }}
   >
-    <Card className="w-10 h-10 flex items-center justify-center m-1 bg-white border-2 border-black text-4xl shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]">
+    <Card className="w-10 h-10 flex items-center justify-center m-1 bg-secondary-background border-2 border-border text-4xl shadow-shadow">
       {digit}
     </Card>
   </motion.div>
@@ -30,7 +30,7 @@ const TimeSegment = ({ value }) => (
 const DigitalClock = () => {
   const [time, setTime] = useState(new Date());
   const [is24Hour, setIs24Hour] = useState(false);
-  const [showSeconds, setShowSeconds] = useState(true);
+  const [showSeconds, setShowSeconds] = useState(false);
 
   // Update the clock accurately every second
   useEffect(() => {
@@ -52,9 +52,9 @@ const DigitalClock = () => {
 
   const formattedHours = String(hours).padStart(2, "0");
   return (
-    <Card className="cursor-grab active:cursor-grabbing w-fit flex flex-col gap-2 p-4 items-center bg-white border-2 border-black shadow-shadow z-10">
+    <Card className="cursor-grab active:cursor-grabbing w-fit flex flex-col gap-2 p-4 items-center bg-secondary-background border-2 border-border shadow-shadow z-10">
       {/* Clock Display */}
-      <div className="flex flex-row items-center gap-1 p-2 bg-teal-400 border-2 border-black shadow-sm rounded-base">
+      <div className="flex flex-row items-center gap-1 p-2 bg-main border-2 border-border shadow-sm rounded-base">
         <TimeSegment value={formattedHours} />
         <span className="text-2xl font-black mx-1 animate-pulse">:</span>
         <TimeSegment value={minutes} />
@@ -71,7 +71,7 @@ const DigitalClock = () => {
         <Button
           onClick={() => setIs24Hour((prev) => !prev)}
           size="sm"
-          className="h-8 text-xs bg-white hover:bg-black hover:text-white text-black border-2 border-black font-bold uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+          className="h-8 text-xs bg-secondary-background hover:bg-foreground hover:text-background text-foreground border-2 border-border font-bold uppercase shadow-shadow active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
         >
           {is24Hour ? "12h" : "24h"}
         </Button>
@@ -79,7 +79,7 @@ const DigitalClock = () => {
         <Button
           onClick={() => setShowSeconds((prev) => !prev)}
           size="sm"
-          className="h-8 text-xs bg-white hover:bg-black hover:text-white text-black border-2 border-black font-bold uppercase shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
+          className="h-8 text-xs bg-secondary-background hover:bg-foreground hover:text-background text-foreground border-2 border-border font-bold uppercase shadow-shadow active:translate-x-[1px] active:translate-y-[1px] active:shadow-none transition-all"
         >
           {showSeconds ? "Hide Sec" : "Show Sec"}
         </Button>

@@ -9,7 +9,7 @@
 
 :root {
   /* --background: oklch(95.08% 0.0481 184.07); */
-  --background: #fff;
+  --background: #f5f5f5;
   --secondary-background: oklch(100% 0 0);
   --foreground: oklch(0% 0 0);
   --main-foreground: oklch(0% 0 0);
@@ -28,7 +28,7 @@
 }
 
 .dark {
-  --background: oklch(22.65% 0.0236 198.49);
+  --background: #1a1a1a;
   --secondary-background: oklch(23.93% 0 0);
   --foreground: oklch(92.49% 0 0);
   --main-foreground: oklch(0% 0 0);
